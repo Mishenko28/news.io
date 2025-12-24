@@ -21,7 +21,7 @@ export default async function NewsItems({ search, category }: { search?: string,
             <div className='flex flex-col gap-12'>
                 {data.results.filter(result => result.description)
                     .map(({ image_url, article_id, title, link, description, pubDate, creator, category, source_icon, source_name, source_url }) => (
-                        <div key={article_id} className='flex items-start gap-2'>
+                        <div key={article_id} className='flex gap-2 h-full'>
                             <div className='flex flex-col gap-2'>
                                 <div className='overflow-hidden'>
                                     <Image
@@ -43,7 +43,7 @@ export default async function NewsItems({ search, category }: { search?: string,
                                     <h1 className='text-sm'>{source_name}</h1>
                                 </Link>
                             </div>
-                            <div className='flex-1 flex flex-col gap-2'>
+                            <div className='flex flex-col gap-2 justify-between'>
                                 <div className='flex flex-col'>
                                     <Link href={link} target='_blank'>
                                         <h1>{title}</h1>
@@ -54,11 +54,8 @@ export default async function NewsItems({ search, category }: { search?: string,
                                     <div className='flex flex-wrap gap-1 text-muted-foreground text-sm'>
                                         <h6>category: </h6>
                                         {category.map((cat, i) => (
-                                            <div className='flex gap-1'>
-                                                <h6
-                                                    key={cat}
-                                                    className='cursor-pointer'
-                                                >{cat}</h6>
+                                            <div key={cat} className='flex gap-1'>
+                                                <h6 className='cursor-pointer'>{cat}</h6>
                                                 {i + 1 !== category.length && <Separator orientation='vertical' />}
                                             </div>
                                         ))}
