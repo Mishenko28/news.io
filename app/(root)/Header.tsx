@@ -4,7 +4,7 @@ import Link from "next/link"
 export default function Header() {
     return (
         <div className="flex flex-row items-end justify-between p-4 border">
-            <h1 className="text-2xl text-accent font-mono">News.io</h1>
+            <h1 className="text-2xl font-mono text-primary">News.io</h1>
             <h1 className="text-3xl">PHILIPPINE NEWS</h1>
             <NavigationMenu>
                 <NavigationMenuList>

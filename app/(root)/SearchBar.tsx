@@ -11,11 +11,9 @@ export default function SearchBar() {
 
     const [search, setSearch] = useState("")
 
-    const handleParams = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const query = e.target.value
+    const handleParams = () => {
+        const query = search
         const params = new URLSearchParams(searchParams.toString())
-
-        setSearch(query)
 
         if (query) {
             params.set("search", query)
@@ -36,10 +34,13 @@ export default function SearchBar() {
                 type="text"
                 placeholder="Search news..."
                 className="flex-1 rounded-r-none"
-                onChange={handleParams}
                 value={search}
+                onChange={e => setSearch(e.target.value)}
             />
-            <SearchIcon className="text-muted-foreground cursor-pointer bg-border h-full px-2 size-10 rounded-r-md" />
+            <SearchIcon
+                onClick={handleParams}
+                className="text-muted-foreground cursor-pointer bg-border h-full px-2 size-10 rounded-r-md"
+            />
         </div>
     )
 }

@@ -2,12 +2,12 @@ import Sidebar from "./Sidebar";
 import News from "./News"
 import Popular from "./Popular";
 
-export default function Body({ search }: { search?: string }) {
+export default function Body({ search, category }: { search?: string, category?: string }) {
 
     return (
         <div className="flex-1 flex gap-4">
             <Sidebar />
-            <News search={search} />
+            <News search={search} category={category} />
             <Popular />
         </div>
     )
