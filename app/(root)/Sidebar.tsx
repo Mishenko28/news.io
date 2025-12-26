@@ -52,7 +52,7 @@ export default function Sidebar() {
     }, [searchParams])
 
     return (
-        <div className="sticky top-4 w-52 border h-full">
+        <div className="sticky top-4 min-w-32 w-52 border h-full hidden md:block">
             <div className="flex flex-col gap-2">
                 <Label className="text-muted-foreground p-2 bg-card">Category</Label>
                 <div className="flex flex-col px-2 text-md">
@@ -68,7 +68,7 @@ export default function Sidebar() {
                     {categories.map(({ label, value }) => (
                         <div
                             key={value}
-                            className="flex items-center text-sm hover:bg-card p-1 cursor-pointer"
+                            className="flex items-center text-xs lg:text-sm hover:bg-card p-1 cursor-pointer"
                             onClick={() => handleCategorie(value)}
                         >
                             {category === value && <ChevronRight className="text-primary size-4" />}

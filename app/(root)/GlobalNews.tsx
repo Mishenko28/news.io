@@ -3,7 +3,7 @@ import GlobalNewsItems from './GlobalNewsItems'
 
 export default function GlobalNews() {
     return (
-        <div className="flex flex-col gap-2 w-xs p-2 border">
+        <div className="flex flex-col gap-2 w-full sm:max-w-xs p-2 border">
             <h1 className="text-center text-xl">Global News</h1>
             <Suspense fallback={<div>Loading...</div>}>
                 <GlobalNewsItems />

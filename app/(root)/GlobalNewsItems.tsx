@@ -10,9 +10,9 @@ export default async function GlobalNewsItems() {
     const image = 0
     const video = 1
 
-    const news = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&language=${language}&image=${image}&video=${video}`)
-    const data: GlobalNewsAPIResponse = await news.json()
-    // const data = newsSample
+    // const news = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&language=${language}&image=${image}&video=${video}`)
+    // const data: GlobalNewsAPIResponse = await news.json()
+    const data = newsSample
 
     return (
         <div className='flex flex-col gap-12'>
