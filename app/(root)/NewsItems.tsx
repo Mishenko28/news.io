@@ -1,24 +1,28 @@
 import newsSample from '@/app/newssample.json'
-import { Separator } from '@/components/ui/separator'
 import moment from 'moment-timezone'
 import Image from 'next/image'
 import Link from 'next/link'
 import Pagination from './Pagination'
 import CategorySearchparams from '@/components/CategorySearchparams'
 
-export default async function NewsItems({ search, category }: { search?: string, category?: string }) {
+export default async function NewsItems({ search, category, page }: { search?: string, category?: string, page?: string }) {
     const apiKey = process.env.NEWSDATA_IO_API_KEY
     const language = "pi"
     const country = "ph"
     const image = 1
 
-    const news = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${country}&language=${language}&image=${image}${search ? `&q=${search}` : ""}${category ? `&category=${category}` : ""}`)
-    const data: NewsAPIResponse = await news.json()
-    // const data = newsSample
+    let data: NewsAPIResponse
+
+    if (process.env.NODE_ENV === 'development') {
+        data = newsSample
+    } else {
+        const news = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${country}&language=${language}&image=${image}${search ? `&q=${search}` : ""}${category ? `&category=${category}` : ""}${page ? `&page=${page}` : ""}`)
+        data = await news.json()
+    }
 
     return (
         <div className='flex flex-col gap-4'>
-            {/* <Pagination totalResults={data.totalResults} nextPage={data.nextPage} /> */}
+            <Pagination nextPage={data.nextPage} />
             {data.results.filter(result => result.description).length <= 0 &&
                 <div className='h-full text-center'>
                     <h1 className='text-secondary'>no result
