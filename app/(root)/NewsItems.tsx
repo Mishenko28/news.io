@@ -66,13 +66,10 @@ export default async function NewsItems({ search, category, page }: { search?: s
                                 </div>
                                 <div className='flex justify-between gap-4'>
                                     <CategorySearchparams category={category} />
-                                    <span className='text-sm text-muted-foreground text-nowrap'>
-                                        {creator ?
-                                            `${moment(pubDate).tz('Asia/Manila').fromNow()} • by ${creator}`
-                                            :
-                                            `${moment(pubDate).tz('Asia/Manila').fromNow()}`
-                                        }
-                                    </span>
+                                    <p className='text-sm text-muted-foreground text-right'>
+                                        <span>{moment(pubDate).tz('Asia/Manila').fromNow()}</span>
+                                        {creator && <span className='text-nowrap'>{` • by ${creator}`}</span>}
+                                    </p>
                                 </div>
                             </div>
                         </div>
