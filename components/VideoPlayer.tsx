@@ -10,7 +10,7 @@ export default function VideoPlayer({ video_url }: { video_url: string }) {
 
 
     return (
-        <div className="relative flex justify-center items-center cursor-pointer">
+        <div className="relative flex justify-center items-center cursor-pointer aspect-video">
             {(!isHovered && !isPlaying) &&
                 <div className="absolute bg-black p-4 rounded-full opacity-50">
                     <PlayIcon className="size-6" />

@@ -10,14 +10,14 @@ export default async function GlobalNewsItems() {
     const image = 0
     const video = 1
 
-    // const news = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&language=${language}&image=${image}&video=${video}`)
-    // const data: GlobalNewsAPIResponse = await news.json()
-    const data = newsSample
+    const news = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&language=${language}&image=${image}&video=${video}`)
+    const data: GlobalNewsAPIResponse = await news.json()
+    // const data = newsSample
 
     return (
         <div className='flex flex-col gap-12'>
             {data.results.map(({ article_id, title, video_url, source_url, source_icon, source_name, pubDate, link }) => (
-                <div key={article_id}>
+                <div key={article_id} className='flex flex-col gap-2'>
                     <VideoPlayer video_url={video_url} />
                     <Link href={link} target='_blank'>
                         <h2 className='text-center leading-4.5 my-2'>{title}</h2>

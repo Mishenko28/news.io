@@ -12,9 +12,9 @@ export default async function NewsItems({ search, category }: { search?: string,
     const country = "ph"
     const image = 1
 
-    // const news = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${country}&language=${language}&image=${image}${search ? `&q=${search}` : ""}${category ? `&category=${category}` : ""}`)
-    // const data: NewsAPIResponse = await news.json()
-    const data = newsSample
+    const news = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${country}&language=${language}&image=${image}${search ? `&q=${search}` : ""}${category ? `&category=${category}` : ""}`)
+    const data: NewsAPIResponse = await news.json()
+    // const data = newsSample
 
     return (
         <div className='flex flex-col gap-4'>
@@ -56,9 +56,9 @@ export default async function NewsItems({ search, category }: { search?: string,
                             <div className='flex flex-col gap-2 justify-between'>
                                 <div className='flex flex-col'>
                                     <Link href={link} target='_blank' className='w-fit'>
-                                        <h1 className='text-sm sm:text-base'>{title}</h1>
+                                        <h1>{title}</h1>
                                     </Link>
-                                    <p className='text-xs sm:text-sm text-accent text-justify'>{description}</p>
+                                    <p className='text-sm text-accent text-justify'>{description}</p>
                                 </div>
                                 <div className='flex justify-between gap-4'>
                                     <CategorySearchparams category={category} />
