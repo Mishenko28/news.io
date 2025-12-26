@@ -37,8 +37,9 @@ export default function Sidebar() {
 
         setCategory(query)
 
-        if (query !== "category" && query !== "") {
+        if (query !== "") {
             params.set('category', query)
+            params.delete('search')
         } else {
             params.delete('category')
         }
@@ -48,10 +49,10 @@ export default function Sidebar() {
     useEffect(() => {
         const category = searchParams.get("category") || ""
         setCategory(category)
-    }, [])
+    }, [searchParams])
 
     return (
-        <div className="w-52 h-full border">
+        <div className="sticky top-4 w-52 border h-full">
             <div className="flex flex-col gap-2">
                 <Label className="text-muted-foreground p-2 bg-card">Category</Label>
                 <div className="flex flex-col px-2 text-md">

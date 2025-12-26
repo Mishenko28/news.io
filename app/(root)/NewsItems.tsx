@@ -4,6 +4,7 @@ import moment from 'moment-timezone'
 import Image from 'next/image'
 import Link from 'next/link'
 import Pagination from './Pagination'
+import CategorySearchparams from '@/components/CategorySearchparams'
 
 export default async function NewsItems({ search, category }: { search?: string, category?: string }) {
     const apiKey = process.env.NEWSDATA_IO_API_KEY
@@ -18,10 +19,18 @@ export default async function NewsItems({ search, category }: { search?: string,
     return (
         <div className='flex flex-col gap-4'>
             {/* <Pagination totalResults={data.totalResults} nextPage={data.nextPage} /> */}
-            <div className='flex flex-col gap-12'>
+            {data.results.filter(result => result.description).length <= 0 &&
+                <div className='h-full text-center'>
+                    <h1 className='text-secondary'>no result
+                        {(search && category) && ` for ${search} and ${category}`}
+                        {(search || category) && ` for ${search || category}`}
+                    </h1>
+                </div>
+            }
+            <div className='flex flex-col'>
                 {data.results.filter(result => result.description)
-                    .map(({ image_url, article_id, title, link, description, pubDate, creator, category, source_icon, source_name, source_url }) => (
-                        <div key={article_id} className='flex gap-2 h-full'>
+                    .map(({ image_url, article_id, title, link, description, pubDate, creator, category, source_icon, source_name, source_url }, i) => (
+                        <div key={article_id} className={`flex gap-2 py-6 ${i % 2 === 1 && "bg-card"}`}>
                             <div className='flex flex-col gap-2'>
                                 <div className='overflow-hidden'>
                                     <Image
@@ -32,12 +41,13 @@ export default async function NewsItems({ search, category }: { search?: string,
                                         className='min-w-3xs aspect-video object-cover hover:scale-110 transition-transform'
                                     />
                                 </div>
-                                <Link href={source_url} target='_blank' className='flex gap-2 items-center'>
+                                <Link href={source_url} target='_blank' className='flex gap-2 items-center w-fit'>
                                     <Image
                                         src={source_icon}
                                         alt='source logo'
                                         width={24}
                                         height={24}
+                                        loading='lazy'
                                         className='min-w-6 object-cover'
                                     />
                                     <h1 className='text-sm'>{source_name}</h1>
@@ -45,21 +55,13 @@ export default async function NewsItems({ search, category }: { search?: string,
                             </div>
                             <div className='flex flex-col gap-2 justify-between'>
                                 <div className='flex flex-col'>
-                                    <Link href={link} target='_blank'>
+                                    <Link href={link} target='_blank' className='w-fit'>
                                         <h1>{title}</h1>
                                     </Link>
                                     <p className='text-sm text-accent text-justify'>{description}</p>
                                 </div>
                                 <div className='flex justify-between gap-4'>
-                                    <div className='flex flex-wrap gap-1 text-muted-foreground text-sm'>
-                                        <h6>category: </h6>
-                                        {category.map((cat, i) => (
-                                            <div key={cat} className='flex gap-1'>
-                                                <h6 className='cursor-pointer'>{cat}</h6>
-                                                {i + 1 !== category.length && <Separator orientation='vertical' />}
-                                            </div>
-                                        ))}
-                                    </div>
+                                    <CategorySearchparams category={category} />
                                     <span className='text-sm text-muted-foreground text-nowrap'>
                                         {creator ?
                                             `${moment(pubDate).tz('Asia/Manila').fromNow()} • by ${creator}`
@@ -72,6 +74,6 @@ export default async function NewsItems({ search, category }: { search?: string,
                         </div>
                     ))}
             </div>
-        </div>
+        </div >
     )
 }

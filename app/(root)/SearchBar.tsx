@@ -11,7 +11,9 @@ export default function SearchBar() {
 
     const [search, setSearch] = useState("")
 
-    const handleParams = () => {
+    const handleParams = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
         const query = search
         const params = new URLSearchParams(searchParams.toString())
 
@@ -26,10 +28,13 @@ export default function SearchBar() {
     useEffect(() => {
         const search = searchParams.get('search') || ""
         setSearch(search)
-    }, [])
+    }, [searchParams])
 
     return (
-        <div className="flex items-center w-sm h-full">
+        <form
+            className="flex w-sm h-full"
+            onSubmit={handleParams}
+        >
             <Input
                 type="text"
                 placeholder="Search news..."
@@ -37,10 +42,11 @@ export default function SearchBar() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
             />
-            <SearchIcon
-                onClick={handleParams}
-                className="text-muted-foreground cursor-pointer bg-border h-full px-2 size-10 rounded-r-md"
-            />
-        </div>
+            <button type="submit" className="min-h-full">
+                <SearchIcon
+                    className="text-muted-foreground cursor-pointer bg-border h-full px-2 size-10 rounded-r-md"
+                />
+            </button>
+        </form>
     )
 }

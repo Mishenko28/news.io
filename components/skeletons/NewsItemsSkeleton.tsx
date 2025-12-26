@@ -2,9 +2,9 @@ import { Skeleton } from "../ui/skeleton";
 
 export default function NewsItemsSkeleton() {
     return (
-        <div className='flex flex-col gap-12'>
+        <div className='flex flex-col'>
             {Array.from({ length: 5 }).map((_, i) => (
-                <div className='flex gap-2'>
+                <div className={`flex gap-2 py-6 ${i % 2 === 1 && "bg-card"}`} key={i}>
                     <div className='flex flex-col gap-2'>
                         <Skeleton className="min-w-3xs aspect-video" />
                         <div className='flex gap-2 items-center'>
