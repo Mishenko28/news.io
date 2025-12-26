@@ -34,7 +34,7 @@ export default async function NewsItems({ search, category, page }: { search?: s
             <div className='flex flex-col'>
                 {data.results.filter(result => result.description)
                     .map(({ image_url, article_id, title, link, description, pubDate, creator, category, source_icon, source_name, source_url }, i) => (
-                        <div key={article_id} className={`flex flex-col lg:flex-row gap-2 py-6 ${i % 2 === 1 && "bg-card"}`}>
+                        <div key={article_id} className={`flex flex-col lg:flex-row gap-2 pb-12 ${i % 2 === 1 && "bg-card"}`}>
                             <div className='flex flex-col gap-2'>
                                 <div className='overflow-hidden'>
                                     <Image
@@ -75,6 +75,7 @@ export default async function NewsItems({ search, category, page }: { search?: s
                         </div>
                     ))}
             </div>
+            <Pagination nextPage={data.nextPage} />
         </div >
     )
 }
