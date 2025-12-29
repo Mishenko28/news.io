@@ -6,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function News({ search, category, page }: { search?: string, category?: string, page?: string }) {
     return (
-        <div className="sticky top-4 flex-1 flex flex-col gap-2 border h-[calc(100svh-(var(--spacing)*8))]">
+        <div className="flex-1 flex flex-col gap-2 border">
             <div className="flex justify-end border-b p-2">
                 <SearchBar />
             </div>

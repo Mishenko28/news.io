@@ -10,13 +10,14 @@ export default function VideoPlayer({ video_url }: { video_url: string }) {
 
 
     return (
-        <div className="relative flex justify-center items-center cursor-pointer aspect-video">
+        <div className="relative flex justify-center items-center cursor-pointer max-h-48 aspect-video bg-card">
             {(!isHovered && !isPlaying) &&
                 <div className="absolute bg-black p-4 rounded-full opacity-50">
                     <PlayIcon className="size-6" />
                 </div>
             }
             <video
+                className="h-full"
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
                 ref={videoRef}

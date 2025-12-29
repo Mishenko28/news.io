@@ -25,9 +25,9 @@ export default async function GlobalNewsItems() {
                 <div key={article_id} className='flex flex-col gap-2'>
                     <VideoPlayer video_url={video_url} />
                     <Link href={link} target='_blank'>
-                        <h2 className='text-center leading-4.5 my-2'>{title}</h2>
+                        <h2 className='text-primary text-center leading-4.5 my-2'>{title}</h2>
                     </Link>
-                    <div className='flex justify-between items-center bg-card p-1'>
+                    <div className='flex justify-between items-center border-b p-1'>
                         <Link href={source_url} target='_blank' className='flex gap-2 items-center w-fit'>
                             <Image
                                 src={source_icon}

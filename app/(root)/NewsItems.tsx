@@ -38,7 +38,7 @@ export default async function NewsItems({ search, category, page }: { search?: s
                     .map(({ image_url, article_id, title, link, description, pubDate, creator, category, source_icon, source_name, source_url }, i) => (
                         <div key={article_id} className={`flex flex-col lg:flex-row pb-12 ${i % 2 === 1 && "bg-card"}`}>
                             <div className='flex flex-col gap-2'>
-                                <div className='overflow-hidden'>
+                                <div className='overflow-hidden bg-card'>
                                     <Image
                                         src={image_url}
                                         alt='news image'
