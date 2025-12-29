@@ -1,4 +1,4 @@
-type NewsAPIResponse = {
+type TLocalNewsAPIResponse = {
     status: string;
     totalResults: number;
     results: {
@@ -34,7 +34,7 @@ type NewsAPIResponse = {
     nextPage: string | null;
 }
 
-type GlobalNewsAPIResponse = {
+type TGlobalNewsAPIResponse = {
     status: string;
     totalResults: number;
     results: {
@@ -68,4 +68,9 @@ type GlobalNewsAPIResponse = {
         duplicate: boolean;
     }[];
     nextPage: string | null;
+}
+
+type TBookmark = {
+    LocalnewsId: string[]
+    globalNewsId: string[]
 }

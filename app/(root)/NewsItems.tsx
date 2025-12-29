@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Pagination from './Pagination'
 import CategorySearchparams from '@/components/CategorySearchparams'
+import BookMark from '@/components/BookMark'
 
 export default async function NewsItems({ search, category, page }: { search?: string, category?: string, page?: string }) {
     const apiKey = process.env.NEWSDATA_IO_API_KEY
@@ -11,7 +12,7 @@ export default async function NewsItems({ search, category, page }: { search?: s
     const country = "ph"
     const image = 1
 
-    let data: NewsAPIResponse
+    let data: TLocalNewsAPIResponse
 
     if (process.env.NODE_ENV === 'development') {
         const randomId = Date.now().toString()
@@ -36,7 +37,8 @@ export default async function NewsItems({ search, category, page }: { search?: s
             <div className='flex flex-col gap-2'>
                 {data.results.filter(result => result.description)
                     .map(({ image_url, article_id, title, link, description, pubDate, creator, category, source_icon, source_name, source_url }, i) => (
-                        <div key={article_id} className={`flex flex-col lg:flex-row pb-12 ${i % 2 === 1 && "bg-card"}`}>
+                        <div key={article_id} className={`relative flex flex-col lg:flex-row pb-12 ${i % 2 === 1 && "bg-card"}`}>
+                            <BookMark article_id={article_id} />
                             <div className='flex flex-col gap-2'>
                                 <div className='overflow-hidden bg-card'>
                                     <Image
@@ -60,9 +62,9 @@ export default async function NewsItems({ search, category, page }: { search?: s
                                 </Link>
                             </div>
                             <div className='flex flex-col gap-2 justify-between p-2'>
-                                <div className='flex flex-col'>
+                                <div className='flex flex-col gap-4'>
                                     <Link href={link} target='_blank' className='w-fit'>
-                                        <h1 className='text-primary text-lg leading-4.5'>{title}</h1>
+                                        <h1 className='text-primary text-lg leading-4.5 mr-10'>{title}</h1>
                                     </Link>
                                     <p className='text-sm text-justify'>{description}</p>
                                 </div>

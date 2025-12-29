@@ -1,13 +1,17 @@
-import Body from "./Body";
-import Header from "./Header";
+import Sidebar from "./Sidebar";
+import News from "./News"
+import GlobalNews from "./GlobalNews";
 
 export default async function Home({ searchParams }: { searchParams: { search?: string, category?: string, page?: string } }) {
-  const { search, category, page } = await searchParams
+    const { search, category, page } = await searchParams
 
-  return (
-    <div className="flex flex-col gap-2 sm:gap-4 w-full p-1 sm:p-4">
-      <Header />
-      <Body search={search} category={category} page={page} />
-    </div>
-  )
+    return (
+        <div className="sm:sticky sm:top-4 flex-1 flex flex-col md:flex-row gap-2 sm:gap-4 sm:max-h-[calc(100svh-(var(--spacing)*8))]">
+            <Sidebar />
+            <div className="flex-1 flex flex-col sm:flex-row gap-2 sm:gap-4">
+                <News search={search} category={category} page={page} />
+                <GlobalNews />
+            </div>
+        </div>
+    )
 }

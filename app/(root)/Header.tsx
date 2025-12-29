@@ -7,7 +7,7 @@ export default function Header() {
             <Link href="/" >
                 <h1 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-mono text-primary">News.io</h1>
             </Link>
-            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl">PHILIPPINE NEWS</h1>
+            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black">PHILIPPINE NEWS</h1>
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
