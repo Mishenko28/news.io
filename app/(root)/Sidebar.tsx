@@ -93,7 +93,7 @@ export default function Sidebar() {
                     <SelectContent position="popper" className="w-fit">
                         <SelectItem value="all">All</SelectItem>
                         {categories.map(({ label, value }) => (
-                            <SelectItem value={value}>{label}</SelectItem>
+                            <SelectItem key={value} value={value}>{label}</SelectItem>
                         ))}
                     </SelectContent>
                 </Select>

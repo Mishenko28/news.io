@@ -12,7 +12,7 @@ export default function News({ search, category, page }: { search?: string, cate
             </div>
             <ScrollArea className="p-2 overflow-hidden">
                 <h1 className="text-xl mb-2">Latest News</h1>
-                {category && <p>Categorized by: <span className="text-accent">{category}</span></p>}
+                {category && <p className="font-light">Categorized by: <span className="text-accent font-medium">{category}</span></p>}
                 {search && <p>Search result:</p>}
                 <Suspense key={`${search}${category}${page}`} fallback={<NewsItemsSkeleton />}>
                     <NewsItems search={search} category={category} page={page} />
