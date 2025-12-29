@@ -14,6 +14,8 @@ export default async function NewsItems({ search, category, page }: { search?: s
     let data: NewsAPIResponse
 
     if (process.env.NODE_ENV === 'development') {
+        const randomId = Date.now().toString()
+        newsSample.nextPage = randomId
         data = newsSample
     } else {
         const news = await fetch(`https://newsdata.io/api/1/latest?apikey=${apiKey}&country=${country}&language=${language}&image=${image}${search ? `&q=${search}` : ""}${category ? `&category=${category}` : ""}${page ? `&page=${page}` : ""}`)
@@ -31,10 +33,10 @@ export default async function NewsItems({ search, category, page }: { search?: s
                     </h1>
                 </div>
             }
-            <div className='flex flex-col'>
+            <div className='flex flex-col gap-2'>
                 {data.results.filter(result => result.description)
                     .map(({ image_url, article_id, title, link, description, pubDate, creator, category, source_icon, source_name, source_url }, i) => (
-                        <div key={article_id} className={`flex flex-col lg:flex-row gap-2 pb-12 ${i % 2 === 1 && "bg-card"}`}>
+                        <div key={article_id} className={`flex flex-col lg:flex-row pb-12 ${i % 2 === 1 && "bg-card"}`}>
                             <div className='flex flex-col gap-2'>
                                 <div className='overflow-hidden'>
                                     <Image
@@ -45,7 +47,7 @@ export default async function NewsItems({ search, category, page }: { search?: s
                                         className='min-w-full lg:min-w-3xs aspect-video object-cover hover:scale-110 transition-transform'
                                     />
                                 </div>
-                                <Link href={source_url} target='_blank' className='flex gap-2 items-center w-fit'>
+                                <Link href={source_url} target='_blank' className='flex gap-2 items-center w-fit px-2'>
                                     <Image
                                         src={source_icon}
                                         alt='source logo'
@@ -57,12 +59,12 @@ export default async function NewsItems({ search, category, page }: { search?: s
                                     <h1 className='text-sm'>{source_name}</h1>
                                 </Link>
                             </div>
-                            <div className='flex flex-col gap-2 justify-between'>
+                            <div className='flex flex-col gap-2 justify-between p-2'>
                                 <div className='flex flex-col'>
                                     <Link href={link} target='_blank' className='w-fit'>
-                                        <h1>{title}</h1>
+                                        <h1 className='text-primary'>{title}</h1>
                                     </Link>
-                                    <p className='text-sm text-accent text-justify'>{description}</p>
+                                    <p className='text-sm text-justify'>{description}</p>
                                 </div>
                                 <div className='flex justify-between gap-4'>
                                     <CategorySearchparams category={category} />

@@ -102,7 +102,7 @@ export default function Pagination({ nextPage }: { nextPage: string | null }) {
             <PaginationContent>
                 {pages.pages.filter(page => page.pageNumber <= pages.activePageNumber + PAGE_OFFSET && page.pageNumber >= pages.activePageNumber - PAGE_OFFSET)
                     .map(({ pageNumber, pageId }) => (
-                        <PaginationLink isActive={pages.activePageNumber === pageNumber} onClick={() => handleClick(pageNumber, pageId)} className="cursor-pointer">
+                        <PaginationLink key={pageId} isActive={pages.activePageNumber === pageNumber} onClick={() => handleClick(pageNumber, pageId)} className="cursor-pointer">
                             <PaginationItem>{pageNumber}</PaginationItem>
                         </PaginationLink>
                     ))

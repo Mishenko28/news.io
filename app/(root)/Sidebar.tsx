@@ -1,11 +1,28 @@
 "use client"
 
 import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const categories = [
+    { value: "business", label: "Business" },
+    { value: "crime", label: "Crime" },
+    { value: "domestic", label: "Domestic" },
+    { value: "education", label: "Education" },
+    { value: "entertainment", label: "Entertainment" },
+    { value: "environment", label: "Environment" },
+    { value: "food", label: "Food" },
+    { value: "health", label: "Health" },
+    { value: "lifestyle", label: "Lifestyle" },
+    { value: "politics", label: "Politics" },
+    { value: "science", label: "Science" },
+    { value: "sports", label: "Sports" },
+    { value: "technology", label: "Technology" },
+    { value: "top", label: "Top" },
+    { value: "tourism", label: "Tourism" },
+    { value: "world", label: "World" },
     { value: "business", label: "Business" },
     { value: "crime", label: "Crime" },
     { value: "domestic", label: "Domestic" },
@@ -52,32 +69,34 @@ export default function Sidebar() {
     }, [searchParams])
 
     return (
-        <div className="sticky top-4 min-w-32 w-52 border h-full hidden md:block">
-            <div className="flex flex-col gap-2">
+        <div className="sticky top-4 min-w-32 w-52 h-[calc(100svh-(var(--spacing)*8))] border hidden md:block">
+            <div className="flex flex-col gap-2 h-full">
                 <Label className="text-muted-foreground p-2 bg-card">Category</Label>
-                <div className="flex flex-col px-2 text-md">
-                    <div
-                        className="flex items-center text-sm hover:bg-card p-1 cursor-pointer"
-                        onClick={() => handleCategorie("")}
-                    >
-                        {category === "" && <ChevronRight className="text-primary size-4" />}
-                        <p
-                            className={`${category === "" ? "text-primary" : ""}`}
-                        >All</p>
-                    </div>
-                    {categories.map(({ label, value }) => (
+                <ScrollArea className="overflow-hidden">
+                    <div className="flex flex-col px-2 text-md">
                         <div
-                            key={value}
-                            className="flex items-center text-xs lg:text-sm hover:bg-card p-1 cursor-pointer"
-                            onClick={() => handleCategorie(value)}
+                            className="flex items-center text-sm hover:bg-card p-1 cursor-pointer"
+                            onClick={() => handleCategorie("")}
                         >
-                            {category === value && <ChevronRight className="text-primary size-4" />}
+                            {category === "" && <ChevronRight className="text-primary size-4" />}
                             <p
-                                className={`${category === value ? "text-primary" : ""}`}
-                            >{label}</p>
+                                className={`${category === "" ? "text-primary" : ""}`}
+                            >All</p>
                         </div>
-                    ))}
-                </div>
+                        {categories.map(({ label, value }) => (
+                            <div
+                                key={value}
+                                className="flex items-center text-xs lg:text-sm hover:bg-card p-1 cursor-pointer"
+                                onClick={() => handleCategorie(value)}
+                            >
+                                {category === value && <ChevronRight className="text-primary size-4" />}
+                                <p
+                                    className={`${category === value ? "text-primary" : ""}`}
+                                >{label}</p>
+                            </div>
+                        ))}
+                    </div>
+                </ScrollArea>
             </div>
         </div >
     )
