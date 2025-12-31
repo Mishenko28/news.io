@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     description: "A simple news app built with Next.js",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -17,7 +17,7 @@ export default function RootLayout({
             <body
                 className={`antialiased dark`}
             >
-                <div className="flex flex-col gap-2 sm:gap-4 w-full p-1 sm:p-4">
+                <div className="flex flex-col gap-2 w-full p-1 sm:p-4">
                     <Header />
                     {children}
                 </div>

@@ -55,7 +55,7 @@ export default function Sidebar() {
 
     return (
         <>
-            <div className="min-w-28 w-52 border hidden md:block">
+            <div className="min-w-28 w-52 border hidden md:block" >
                 <div className="flex flex-col gap-2 h-full">
                     <Label className="text-muted-foreground p-2 bg-card">Category</Label>
                     <ScrollArea className="overflow-hidden">

@@ -69,6 +69,7 @@
   --shadow-opacity: var(--shadow-opacity);
   --color-shadow-color: var(--shadow-color);
   --color-destructive-foreground: var(--destructive-foreground);
+  --animate-move-left: moveLeft 500s linear infinite;
 }
 
 :root {
@@ -193,8 +194,15 @@
   }
 }
 
+@keyframes moveLeft {
+  from {
+    transform: translateX(0);
+  }
 
-
+  to {
+    transform: translateX(-100%);
+  }
+}
 
 
 

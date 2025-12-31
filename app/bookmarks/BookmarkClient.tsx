@@ -6,6 +6,7 @@ import moment from "moment-timezone"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { motion } from "framer-motion"
 
 export default function BookmarkClient({ api }: { api: string }) {
     const [local, setLocal] = useState<TLocalNewsAPIResponse | null>(null)
@@ -41,7 +42,13 @@ export default function BookmarkClient({ api }: { api: string }) {
     return (
         <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-4">
             {local?.results.map(({ image_url, article_id, title, link, description, pubDate, creator, category, source_icon, source_name, source_url }, i) => (
-                <div key={article_id} className={`relative flex flex-col lg:flex-row pb-12 ${i % 2 === 1 && "bg-card"}`}>
+                <motion.div
+                    key={article_id}
+                    className={`relative flex flex-col lg:flex-row pb-12 ${i % 2 === 1 && "bg-card"}`}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.4 }}
+                >
                     <BookMark article_id={article_id} />
                     <div className='flex flex-col gap-2'>
                         <div className='overflow-hidden bg-card'>
@@ -77,8 +84,11 @@ export default function BookmarkClient({ api }: { api: string }) {
                             {creator && <span className='text-nowrap'>{` • by ${creator}`}</span>}
                         </p>
                     </div>
-                </div>
+                </motion.div>
             ))}
+            {!local &&
+                <h1 className="text-center col-span-full text-muted-foreground my-10">No bookmarks found.</h1>
+            }
         </div>
     )
 }
