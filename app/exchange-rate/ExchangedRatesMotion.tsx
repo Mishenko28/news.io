@@ -15,7 +15,7 @@ export default function ExchangedRatesMotion({ rates }: { rates: TRates }) {
                     transition={{ delay: i * 0.05 }}
                 >
                     <h2 className="text-primary font-bold text-xs sm:text-base">PHP / {currency}</h2>
-                    <p className="text-right sm:text-xl">{rate}</p>
+                    <p className="text-right sm:text-xl">₱ {(1 / rate).toFixed(4)}</p>
                 </motion.div>
             ))}
         </div>

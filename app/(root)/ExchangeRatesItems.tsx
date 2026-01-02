@@ -26,7 +26,7 @@ export default async function ExchangeRatesItems() {
                                 className="text-nowrap bg-card py-1 px-4"
                             >
                                 <h1 className="text-xs text-primary font-bold">PHP / {currency}</h1>
-                                <p className="text-sm">{rate}</p>
+                                <p className="text-sm">₱ {(1 / rate).toFixed(4)}</p>
                             </div>
                         ))}
                     </div>
